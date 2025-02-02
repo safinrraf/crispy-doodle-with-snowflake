@@ -27,22 +27,25 @@ __status__ = "Prototype"
 
 
 
+with open('secrets/twitter/keys.json') as config_file:
+    config = json.load(config_file)
+
 ##############
 # KEYS
 ##############
 #get your Twitter API Key and Secret https://developer.twitter.com/en/apply-for-access
-consumer_key = "*************************"
-consumer_secret = "**************************************************"
+consumer_key = config['consumer_key']
+consumer_secret = config['consumer_secret']
 # get your Twitter Access Token and Secret https://developer.twitter.com/en/apply-for-access
-access_token = "**************************************************"
-access_token_secret = "*********************************************"
+access_token = config['access_token']
+access_token_secret = config['access_token_secret']
 #AWS bucket name
-bucket = "my-twitter-bucket"
+bucket = "my-twitter-to-snowflake-s3-bucket-1234"
 # specify your own default twitter keyword here. 
 keyword = "#covid"
 
 
-
+# Function to consume the tweets from the queue and write to S3
 def consumer():
     tweet_list = []
     total_count = 0
